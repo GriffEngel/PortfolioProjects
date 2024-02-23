@@ -25,22 +25,18 @@ where Sales_Channel like '%online%'
 -- Making the same query for the other values of Sales_Channel
 -- These could made to be views in some situations for quicker access
 
--- CREATE VIEW AS InStore_Sales
 select OrderNumber, Sales_Channel, Order_Quantity, (Unit_Price - Unit_Cost) * Order_Quantity * (1 - Discount_Applied/100)) AS Profit
 from US_Regional_Sales_Data
 where Sales_Channel like '%In-Store%'
 
--- CREATE VIEW AS Wholesale_Sales
 select OrderNumber, Sales_Channel, Order_Quantity, Discount_Applied, Unit_Price, Unit_Cost, (Unit_Price - Unit_Cost) * Order_Quantity * (1 - Discount_Applied/100) AS Profit
 from US_Regional_Sales_Data
 where Sales_Channel like '%Wholesale%'
 
--- CREATE VIEW AS Distributor_Sales
 select OrderNumber, Sales_Channel, Order_Quantity, Discount_Applied, Unit_Price, Unit_Cost, (Unit_Price - Unit_Cost) * Order_Quantity * (1 - Discount_Applied/100) AS Profit
 from US_Regional_Sales_Data
 where Sales_Channel like '%Distributor%'
 
--- Looking at Sales Teams' Performance
 select SalesTeamID, Sales_Channel, SUM(Order_Quantity) AS Total_Quantity, 
     AVG(Discount_Applied) AS Average_Discount, 
     SUM((Unit_Price - Unit_Cost) * Order_Quantity * (1 - Discount_Applied/100)) AS Total_Profit
