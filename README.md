@@ -6,5 +6,5 @@
 
 ### Tools
 
-- [] SQL Server
+- SQL Server
 
